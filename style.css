@@ -1,0 +1,235 @@
+/* Сброс стилей */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Анимированный градиент фона */
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: #fff;
+}
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Контейнер приложения */
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Шапка */
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+header .logo {
+  font-size: 3em;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+/* Полупрозрачный блок */
+.container {
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+}
+
+/* Главное меню */
+#mainMenu {
+  /* НЕ задаём text-align: center для всего содержимого,
+     чтобы текст и картинки не были принудительно выровнены */
+  padding: 20px;
+}
+#mainMenu h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+.menu-item {
+  background: rgba(255,255,255,0.2);
+  border-radius: 15px;
+  padding: 20px;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+.menu-item:hover {
+  transform: translateY(-5px);
+  background: rgba(255,255,255,0.3);
+}
+.menu-item h2 {
+  font-size: 1.5em;
+  color: #fff;
+}
+
+/* Подменю */
+#subMenu {
+  padding: 20px;
+}
+#subMenu h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #fff;
+  text-align: center;
+}
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+.submenu-item {
+  background: rgba(255,255,255,0.2);
+  border-radius: 15px;
+  padding: 15px;
+  width: 90%;
+  max-width: 350px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  color: #fff;
+  text-align: center;
+}
+.submenu-item:hover {
+  transform: translateX(5px);
+  background: rgba(255,255,255,0.3);
+}
+
+/* Контент гайда */
+#guideContent {
+  /* Убираем text-align: center */
+  padding: 20px;
+}
+
+/* Контейнер для текста и картинок гайда */
+#guideDetails {
+  margin: 0 auto;
+  max-width: 900px; /* при необходимости */
+  /* text-align: left; чтобы текст шёл слева */
+  text-align: left;
+}
+
+/* Заголовки внутри гайда */
+#guideDetails h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+/* Абзацы внутри гайда */
+#guideDetails p {
+  font-size: 1em;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+/* Картинки внутри гайда — делаем блочными, чтобы не было наложений */
+#guideDetails img {
+  display: block;          /* Блочное поведение */
+  max-width: 100%;         /* Не вылезает за контейнер */
+  height: auto;            /* Сохраняет пропорции */
+  border-radius: 15px;
+  margin: 15px 0;          /* Отступ сверху и снизу */
+  transition: transform 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+#guideDetails img:hover {
+  transform: scale(1.05);
+}
+
+/* Кнопки "Назад" */
+.back-button {
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 1em;
+  transition: background 0.3s;
+}
+.back-button:hover {
+  background: rgba(0,0,0,0.7);
+}
+
+/* Интерактивное изображение */
+.interactive-image-container {
+  position: relative;
+  display: block;
+  margin: 20px 0;
+}
+.interactive-image-container img {
+  display: block;
+  max-width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.hotspot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: rgba(0, 153, 255, 0.8);
+  cursor: pointer;
+  border: 2px solid #fff;
+}
+.tooltip {
+  display: none;
+  position: absolute;
+  top: 24px;
+  left: 0;
+  background-color: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  white-space: pre-wrap;
+  z-index: 10;
+}
+.hotspot:hover .tooltip {
+  display: block;
+}
+.tooltip::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 10px;
+  border-width: 0 6px 6px 6px;
+  border-style: solid;
+  border-color: transparent transparent rgba(0,0,0,0.8) transparent;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  header .logo {
+    font-size: 2.5em;
+  }
+  #app {
+    padding: 10px;
+  }
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>TAIYAN - Гайды по использованию</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <!-- Telegram Web Apps -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- GSAP для анимаций -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1 class="logo">TAIYAN</h1>
+    </header>
+    <div class="container">
+      <!-- Главное меню -->
+      <div id="mainMenu">
+        <h2>Выберите раздел</h2>
+        <div id="mainMenuItems" class="menu-grid"></div>
+      </div>
+      
+      <!-- Подменю -->
+      <div id="subMenu" style="display: none;">
+        <button id="backToMain" class="back-button">← Назад</button>
+        <h2 id="subMenuTitle">Подменю</h2>
+        <div id="subMenuItems" class="menu-list"></div>
+      </div>
+      
+      <!-- Контент гайда -->
+      <div id="guideContent" style="display: none;">
+        <button id="backToSubMenu" class="back-button">← Назад</button>
+        <div id="guideDetails"></div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
