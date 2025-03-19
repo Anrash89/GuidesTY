@@ -49,14 +49,12 @@ header .logo {
 
 /* Главное меню */
 #mainMenu {
-  /* НЕ задаём text-align: center для всего содержимого,
-     чтобы текст и картинки не были принудительно выровнены */
-  padding: 20px;
+  padding: 20px; /* не центрируем весь блок */
 }
 #mainMenu h2 {
   font-size: 2em;
   margin-bottom: 20px;
-  text-align: center;
+  text-align: center; /* заголовок по центру */
 }
 .menu-grid {
   display: grid;
@@ -117,16 +115,14 @@ header .logo {
 
 /* Контент гайда */
 #guideContent {
-  /* Убираем text-align: center */
   padding: 20px;
 }
 
 /* Контейнер для текста и картинок гайда */
 #guideDetails {
   margin: 0 auto;
-  max-width: 900px; /* при необходимости */
-  /* text-align: left; чтобы текст шёл слева */
-  text-align: left;
+  max-width: 900px; 
+  text-align: left; /* Текст и картинки идут слева */
 }
 
 /* Заголовки внутри гайда */
@@ -146,11 +142,11 @@ header .logo {
 
 /* Картинки внутри гайда — делаем блочными, чтобы не было наложений */
 #guideDetails img {
-  display: block;          /* Картинка занимает всю строку */
-  max-width: 100%;         /* Не выходит за границы контейнера */
-  height: auto;            /* Сохраняет пропорции */
-  margin: 15px 0;          /* Отступы сверху и снизу */
-  border-radius: 8px;      /* Скруглённые углы (по желанию) */
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 15px 0;
+  border-radius: 8px;
   transition: transform 0.3s;
   box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
@@ -219,6 +215,25 @@ header .logo {
   border-width: 0 6px 6px 6px;
   border-style: solid;
   border-color: transparent transparent rgba(0,0,0,0.8) transparent;
+}
+
+/* Делаем картинки кликабельными, если мы оборачиваем их в ссылку .image-link */
+#guideDetails a.image-link {
+  display: block;         /* Ссылка занимает всю строку */
+  text-decoration: none;  /* Убираем подчеркивание */
+  color: inherit;         /* Цвет ссылки = цвету текста */
+}
+#guideDetails a.image-link img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 15px 0;
+  border-radius: 8px;
+  transition: transform 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+#guideDetails a.image-link img:hover {
+  transform: scale(1.05);
 }
 
 /* Адаптивность */
