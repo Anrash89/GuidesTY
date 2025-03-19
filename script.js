@@ -105,13 +105,26 @@ document.addEventListener("DOMContentLoaded", function() {
       let sectionEl;
 
       if (section.type === 'text') {
+        // Обычный текст
         sectionEl = document.createElement('p');
         sectionEl.innerHTML = section.content;
+
       } else if (section.type === 'image') {
-        sectionEl = document.createElement('img');
-        sectionEl.src = section.src;
-        sectionEl.alt = section.alt || '';
+        // Оборачиваем <img> в ссылку <a>, чтобы картинка была кликабельной
+        const linkEl = document.createElement('a');
+        linkEl.href = section.src;
+        linkEl.target = "_blank";       // Открывать в новой вкладке
+        linkEl.className = "image-link"; // Применяются стили .image-link из style.css
+
+        const imgEl = document.createElement('img');
+        imgEl.src = section.src;
+        imgEl.alt = section.alt || '';
+
+        linkEl.appendChild(imgEl);
+        sectionEl = linkEl;
+
       } else if (section.type === 'interactive-image') {
+        // Интерактивная картинка с hotspot'ами
         const containerEl = document.createElement('div');
         containerEl.className = 'interactive-image-container';
 
@@ -139,6 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       guideDetails.appendChild(sectionEl);
 
+      // GSAP-анимация появления
       gsap.from(sectionEl, {
         opacity: 0,
         y: 30,
@@ -166,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // Кнопка "Назад" для возврата к главному меню (оставляем рабочий код)
+  // Кнопка "Назад" для возврата к главному меню
   document.getElementById('backToMain').addEventListener('click', () => {
     const subMenuEl = document.getElementById('subMenu');
     const mainMenuEl = document.getElementById('mainMenu');
