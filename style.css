@@ -146,11 +146,11 @@ header .logo {
 
 /* Картинки внутри гайда — делаем блочными, чтобы не было наложений */
 #guideDetails img {
-  display: block;          /* Блочное поведение */
-  max-width: 100%;         /* Не вылезает за контейнер */
+  display: block;          /* Картинка занимает всю строку */
+  max-width: 100%;         /* Не выходит за границы контейнера */
   height: auto;            /* Сохраняет пропорции */
-  border-radius: 15px;
-  margin: 15px 0;          /* Отступ сверху и снизу */
+  margin: 15px 0;          /* Отступы сверху и снизу */
+  border-radius: 8px;      /* Скруглённые углы (по желанию) */
   transition: transform 0.3s;
   box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
