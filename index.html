@@ -14,19 +14,27 @@
 </head>
 <body>
   <div id="app">
+    <!-- Фиксированная шапка -->
     <header>
       <button id="menuToggle" class="menu-toggle">&#9776;</button>
       <h1 class="logo">TAIYAN</h1>
     </header>
     
-    <!-- Выдвижное меню -->
+    <!-- Горизонтальное меню для прямого доступа -->
+    <nav id="directAccessMenu">
+      <ul id="directMenuList">
+        <!-- Элементы формируются динамически -->
+      </ul>
+    </nav>
+    
+    <!-- Выдвижное боковое меню -->
     <aside id="sideMenu">
       <div class="side-menu-header">
         <h2>Категории</h2>
         <button id="closeMenu" class="close-menu">&times;</button>
       </div>
       <ul id="menuList">
-        <!-- Пункты меню будут созданы динамически -->
+        <!-- Категории и подкатегории, а в конце внешние ссылки -->
       </ul>
     </aside>
     
@@ -34,14 +42,13 @@
     <main id="content">
       <div id="welcome">
         <h2>Добро пожаловать!</h2>
-        <p>Выберите нужный гайд через выдвижное меню слева.</p>
+        <p>Выберите нужный гайд через боковое меню или прямой доступ в верхней панели.</p>
       </div>
       <div id="guideContent" style="display: none;">
-        <!-- Здесь загружается содержимое гайда -->
+        <!-- Содержимое гайда загружается сюда -->
       </div>
     </main>
   </div>
-  
   <script src="script.js"></script>
 </body>
 </html>

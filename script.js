@@ -1,28 +1,27 @@
 document.addEventListener("DOMContentLoaded", function() {
   // Инициализация Telegram Web Apps, если используется внутри бота
   const tg = window.Telegram?.WebApp;
-  if (tg) {
-    tg.expand();
-  }
+  if (tg) tg.expand();
 
   let menuData = [];
-  
-  // Загружаем JSON с гайдами
+
+  // Загружаем JSON с гайдами (JSON не меняем)
   fetch('guides.json?v=' + new Date().getTime())
     .then(response => response.json())
     .then(data => {
       menuData = data;
       populateSideMenu(data);
+      populateDirectMenu(data);
     })
     .catch(error => console.error('Ошибка загрузки данных:', error));
 
-  // Функция формирования выдвижного меню
+  // Формирование выдвижного меню (боковой панели)
   function populateSideMenu(data) {
     const menuList = document.getElementById('menuList');
     menuList.innerHTML = "";
     
+    // Проходим по категориям из JSON
     data.forEach(category => {
-      // Создаем элемент для большой категории
       const categoryItem = document.createElement('li');
       categoryItem.className = 'category-item';
       categoryItem.textContent = category.title;
@@ -36,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function() {
         subItem.className = 'subcategory-item';
         subItem.textContent = submenu.title;
         subItem.addEventListener('click', () => {
-          // Закрываем меню при выборе
           closeSideMenu();
           if (submenu.guide) {
             openGuide(submenu.guide, submenu.title);
@@ -50,6 +48,51 @@ document.addEventListener("DOMContentLoaded", function() {
       categoryItem.appendChild(subList);
       menuList.appendChild(categoryItem);
     });
+    
+    // Добавляем секцию с внешними ссылками в самом конце меню
+    const externalHeader = document.createElement('li');
+    externalHeader.className = 'external-header';
+    externalHeader.textContent = 'Внешние ссылки';
+    menuList.appendChild(externalHeader);
+    
+    const externalLinks = [
+      { label: 'Изображение', url: 'https://home-northeast-preparing-mitchell.trycloudflare.com/' },
+      { label: 'Из аудио в текст', url: 'https://peace-gentleman-mh-disabilities.trycloudflare.com' },
+      { label: 'Улучшение изображения', url: 'https://township-fundamental-extra-lovers.trycloudflare.com' }
+    ];
+    
+    externalLinks.forEach(linkData => {
+      const extItem = document.createElement('li');
+      extItem.className = 'external-item';
+      const linkEl = document.createElement('a');
+      linkEl.href = linkData.url;
+      linkEl.target = "_blank";
+      linkEl.textContent = linkData.label;
+      extItem.appendChild(linkEl);
+      menuList.appendChild(extItem);
+    });
+  }
+
+  // Формирование горизонтального меню прямого доступа
+  function populateDirectMenu(data) {
+    const directMenuList = document.getElementById('directMenuList');
+    directMenuList.innerHTML = "";
+    data.forEach(category => {
+      category.submenus.forEach(submenu => {
+        if(submenu.guide) {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = "#";
+          a.textContent = `${category.title} - ${submenu.title}`;
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            openGuide(submenu.guide, submenu.title);
+          });
+          li.appendChild(a);
+          directMenuList.appendChild(li);
+        }
+      });
+    });
   }
 
   // Открытие гайда в основном контенте
@@ -57,11 +100,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const guideContentEl = document.getElementById('guideContent');
     const welcomeEl = document.getElementById('welcome');
     guideContentEl.innerHTML = "";
-
+    
     const titleEl = document.createElement('h2');
     titleEl.textContent = guideTitle;
     guideContentEl.appendChild(titleEl);
-
+    
     guideObj.sections.forEach((section, index) => {
       let sectionEl;
       if (section.type === 'text') {
@@ -100,12 +143,19 @@ document.addEventListener("DOMContentLoaded", function() {
         sectionEl = containerEl;
       }
       guideContentEl.appendChild(sectionEl);
-      gsap.from(sectionEl, { opacity: 0, y: 20, duration: 0.6, delay: index * 0.2, ease: "power2.out" });
+      gsap.from(sectionEl, {
+        opacity: 0,
+        y: 20,
+        duration: 0.6,
+        delay: index * 0.2,
+        ease: "power2.out"
+      });
     });
     
     // Показываем блок с гайдом и скрываем приветствие
     welcomeEl.style.display = "none";
     guideContentEl.style.display = "block";
+    gsap.from(guideContentEl, { opacity: 0, y: 30, duration: 0.5, ease: "power2.out" });
   }
 
   // Функция открытия бокового меню
@@ -120,8 +170,7 @@ document.addEventListener("DOMContentLoaded", function() {
     gsap.to(sideMenu, { x: "-100%", duration: 0.3, ease: "power2.in" });
   }
 
-  // Обработчик кнопки гамбургера
+  // Обработчики кнопок
   document.getElementById('menuToggle').addEventListener('click', openSideMenu);
-  // Обработчик кнопки закрытия меню
   document.getElementById('closeMenu').addEventListener('click', closeSideMenu);
 });
