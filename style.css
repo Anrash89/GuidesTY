@@ -5,208 +5,176 @@
   box-sizing: border-box;
 }
 
-/* Анимированный градиент фона */
 body {
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-  color: #fff;
-}
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Контейнер приложения */
-#app {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  background-color: #fff;
+  color: #333;
+  line-height: 1.6;
 }
 
 /* Шапка */
 header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-header .logo {
-  font-size: 3em;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: #fff;
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-}
-
-/* Полупрозрачный блок */
-.container {
-  background: rgba(255,255,255,0.1);
-  border-radius: 20px;
-  padding: 20px;
-  backdrop-filter: blur(10px);
-}
-
-/* Главное меню */
-#mainMenu {
-  padding: 20px; /* не центрируем весь блок */
-}
-#mainMenu h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
-  text-align: center; /* заголовок по центру */
-}
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
-.menu-item {
-  background: rgba(255,255,255,0.2);
-  border-radius: 15px;
-  padding: 20px;
-  cursor: pointer;
-  transition: transform 0.3s, background 0.3s;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-.menu-item:hover {
-  transform: translateY(-5px);
-  background: rgba(255,255,255,0.3);
-}
-.menu-item h2 {
-  font-size: 1.5em;
-  color: #fff;
-}
-
-/* Подменю */
-#subMenu {
-  padding: 20px;
-}
-#subMenu h2 {
-  font-size: 1.8em;
-  margin-bottom: 20px;
-  color: #fff;
-  text-align: center;
-}
-.menu-list {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 15px;
+  background-color: #fff;
+  border-bottom: 2px solid #e74c3c;
+  padding: 10px 20px;
+  position: relative;
+  z-index: 1001;
 }
-.submenu-item {
-  background: rgba(255,255,255,0.2);
-  border-radius: 15px;
-  padding: 15px;
-  width: 90%;
-  max-width: 350px;
-  font-size: 1.2em;
+
+.logo {
+  flex: 1;
+  text-align: center;
+  font-size: 2em;
+  color: #e74c3c;
+}
+
+/* Кнопка-гамбургер */
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: 1.8em;
+  color: #e74c3c;
   cursor: pointer;
-  transition: transform 0.3s, background 0.3s;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  color: #fff;
+}
+
+/* Выдвижное меню */
+#sideMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  background-color: #fff;
+  border-right: 2px solid #e74c3c;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.side-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e74c3c;
+}
+
+.side-menu-header h2 {
+  font-size: 1.4em;
+  color: #e74c3c;
+}
+
+.close-menu {
+  background: none;
+  border: none;
+  font-size: 1.6em;
+  color: #e74c3c;
+  cursor: pointer;
+}
+
+#menuList {
+  list-style: none;
+  padding: 10px 0;
+}
+
+.category-item {
+  padding: 10px 20px;
+  border-bottom: 1px solid #eee;
+  font-weight: 700;
+  color: #e74c3c;
+}
+
+.subcategory-list {
+  list-style: none;
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+.subcategory-item {
+  padding: 8px 0;
+  cursor: pointer;
+  color: #333;
+  font-weight: 400;
+  border-left: 3px solid transparent;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.subcategory-item:hover {
+  background-color: #fceae8;
+  border-left-color: #e74c3c;
+}
+
+/* Основной контент */
+#content {
+  padding: 20px;
+  margin-top: 20px;
+}
+
+#welcome {
   text-align: center;
 }
-.submenu-item:hover {
-  transform: translateX(5px);
-  background: rgba(255,255,255,0.3);
-}
 
-/* Контент гайда */
 #guideContent {
-  padding: 20px;
-}
-
-/* Контейнер для текста и картинок гайда */
-#guideDetails {
+  max-width: 800px;
   margin: 0 auto;
-  max-width: 900px; 
-  text-align: left; /* Текст и картинки идут слева */
 }
 
-/* Заголовки внутри гайда */
-#guideDetails h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-/* Абзацы внутри гайда */
-#guideDetails p {
-  font-size: 1em;
-  line-height: 1.5;
-  margin-bottom: 15px;
-  color: #fff;
-}
-
-/* Картинки внутри гайда — делаем блочными, чтобы не было наложений */
-#guideDetails img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 15px 0;
-  border-radius: 8px;
+/* Изображения в гайде */
+#guideContent img {
+  width: 100%;
+  border-radius: 5px;
+  margin: 20px 0;
   transition: transform 0.3s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-}
-#guideDetails img:hover {
-  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Кнопки "Назад" */
-.back-button {
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-bottom: 20px;
-  font-size: 1em;
-  transition: background 0.3s;
-}
-.back-button:hover {
-  background: rgba(0,0,0,0.7);
+#guideContent img:hover {
+  transform: scale(1.03);
 }
 
 /* Интерактивное изображение */
 .interactive-image-container {
   position: relative;
-  display: block;
   margin: 20px 0;
 }
+
 .interactive-image-container img {
-  display: block;
-  max-width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  width: 100%;
+  border-radius: 5px;
 }
+
 .hotspot {
   position: absolute;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: rgba(0, 153, 255, 0.8);
-  cursor: pointer;
+  width: 14px;
+  height: 14px;
+  background-color: #e74c3c;
   border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
 }
+
 .tooltip {
   display: none;
   position: absolute;
   top: 24px;
   left: 0;
-  background-color: rgba(0,0,0,0.8);
+  background-color: #333;
   color: #fff;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 0.9em;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.85em;
   white-space: pre-wrap;
   z-index: 10;
 }
+
 .hotspot:hover .tooltip {
   display: block;
 }
+
 .tooltip::before {
   content: "";
   position: absolute;
@@ -214,37 +182,22 @@ header .logo {
   left: 10px;
   border-width: 0 6px 6px 6px;
   border-style: solid;
-  border-color: transparent transparent rgba(0,0,0,0.8) transparent;
+  border-color: transparent transparent #333 transparent;
 }
 
-/* Делаем картинки кликабельными, если мы оборачиваем их в ссылку .image-link */
-#guideDetails a.image-link {
-  display: block;         /* Ссылка занимает всю строку */
-  text-decoration: none;  /* Убираем подчеркивание */
-  color: inherit;         /* Цвет ссылки = цвету текста */
-}
-#guideDetails a.image-link img {
+/* Ссылки на картинки */
+a.image-link {
   display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 15px 0;
-  border-radius: 8px;
-  transition: transform 0.3s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-}
-#guideDetails a.image-link img:hover {
-  transform: scale(1.05);
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Адаптивность */
+/* Адаптив */
 @media (max-width: 768px) {
-  header .logo {
-    font-size: 2.5em;
+  #sideMenu {
+    width: 240px;
   }
-  #app {
-    padding: 10px;
-  }
-  .menu-grid {
-    grid-template-columns: 1fr;
+  .logo {
+    font-size: 1.8em;
   }
 }

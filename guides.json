@@ -40,20 +40,20 @@
             },
             {
               "type": "text",
-              "content": "Выше интерактивная картинка, с полезными ползунками (точки на картинке активные). Переходим по <a href='https://widely-valley-passing-comfortable.trycloudflare.com/pinokio/login' target='_blank'>этой ссылке</a> и попадает в главное меню"
+              "content": "Выше интерактивная картинка, с полезными ползунками (точки на картинке активные). Переходим по <a href='https://manitoba-aye-lid-menus.trycloudflare.com/pinokio/login' target='_blank'>этой ссылке</a> и попадает в главное меню"
             },
             {
               "type": "image",
-              "src": "images/Stable_diffusion_1.png",
+              "src": "images/stable_diffusion_1.png",
               "alt": "Пример изображения 1"
             },
             {
               "type": "text",
-              "content": "Выставляет предварительные настройки, ОБЯЗАТЕЛЬНЫЕ! Это GPU Weights до 10000!!!  Это количество шагов (от 20 до 40) Чем больше, тем лучше, но тем и дольше. И размер изображения (Width - Ширина, Height - высота. 9:16 (1080х1920), 1:1 (1000х1000). После этого можем писать PROMT"
+              "content": "Выставляет предварительные настройки, обязательные! Это количество шагов (от 20 до 40) Чем больше, тем лучше, но тем и дольше. И размер изображения (Width - Ширина, Height - высота. 9:16 (1080х1920), 1:1 (1000х1000). После этого можем писать PROMT"
             },
             {
               "type": "image",
-              "src": "images/Stable_diffusion_2.png",
+              "src": "images/stable_diffusion_2.png",
               "alt": "Пример изображения 2"
             },
             {
@@ -62,7 +62,7 @@
             },
             {
               "type": "image",
-              "src": "images/Stable_diffusion_3.png",
+              "src": "images/stable_diffusion_3.png",
               "alt": "Пример изображения 3"
             },
             {
@@ -71,7 +71,7 @@
             },
             {
               "type": "image",
-              "src": "images/Stable_diffusion_4.png",
+              "src": "images/stable_diffusion_4.png",
               "alt": "Пример изображения 4"
             },
             {
@@ -80,12 +80,12 @@
             },
             {
               "type": "image",
-              "src": "images/Stable_diffusion_5.png",
+              "src": "images/stable_diffusion_5.png",
               "alt": "Пример изображения 5"
             },
             {
               "type": "text",
-              "content": "Второй метод. Это генерация картинки с основой в виде другой картинки. Переходи во вкладку img2img. Внизу поле, есть img2img, это генерация на основе картинки, главное выставить верную высоту и ширину, под стать картинки которую загрузили. Inpaint это генерация области на уже готовой картинке (загружаешь, выделяешь область и пишешь промт)"
+              "content": "Второй метод. Это генерация картинки с основой в виде другой картинки. Переходи во вкладку img2img. Внизу поле, есть img2img, это генерация на основе картинки, главное выставить верную высоту и ширину, под стать картинки которую загрузили. Inpaint это генерация области на уже готовой картинке (загружаешь, выделяешь область и пишешь промт) "
             }
           ]
         }
@@ -134,7 +134,20 @@
         }
       },
       {
-        "title": "Upscale изображения"
+        "title": "Идеальный PROMT для картинок",
+        "guide": {
+          "sections": [
+            {
+              "type": "text",
+              "content": "ВМЕСТО КВАДРАТНЫХ СКОБОК ВСТАВЛЯЕМ ТО, ЧТО НУЖНО. You are a text prompt generator for creating images. I will give you a post topic, and you will generate **one** best-quality prompt and show it to me.\n\n[что вы хотите нарисовать]\n\nDo **not** ask for clarifications—just generate the best prompt using your creativity, and I will request changes if needed.\n\n### Prompt Structure:\n- **Camera angle → Scene description → Character description → Camera settings**\n- **Character descriptions must always be separated by commas.**\n- **All parts of the structure must be separated by commas.**\n\n### Notes:\n- At the end of the prompt, you may also include the camera type (if it's not a painting style), such as **DSLR, Nikon D, Canon EOS R3, etc.**\n- You can specify a lens type (e.g., **14mm focal length, 35mm, fisheye, wide-angle, etc.**) if necessary.\n\n### Example Formatting:\n- **Highly detailed watercolor painting, majestic lion, intricate fur detail, photograph, natural lighting, brush strokes, watercolor splatters**\n- **Portrait photo of a red-haired girl standing in water covered with lily pads, long braided hair, Canon EOS R3, volumetric lighting**\n- **Wide-angle, stunning sunset over a wide open beach, vibrant pink-orange and gold sky, water reflecting sunset colors, mesmerizing effect, lone tall tree in foreground, tree silhouetted against sunset, dramatic feel, Canon EOS R3, landscape scene**\n- **Watercolor painting, family of elephants roaming the savanna, delicate brush strokes, soft colors, Canon EOS R3, wide-angle lens**\n\n### IMPORTANT:\nGenerate the **best possible** prompt **immediately** in **English**, and show **only** the prompt. Do not write anything else."
+            },
+            {
+              "type": "image",
+              "src": "images/improve_11.png",
+              "alt": "Изображение 1"
+            }
+          ]
+        }
       }
     ]
   },

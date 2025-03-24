@@ -6,140 +6,90 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   let menuData = [];
-  // Обход кэширования
+  
+  // Загружаем JSON с гайдами
   fetch('guides.json?v=' + new Date().getTime())
     .then(response => response.json())
     .then(data => {
       menuData = data;
-      populateMainMenu(data);
-      gsap.from("#mainMenu", {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        ease: "power2.out"
-      });
+      populateSideMenu(data);
     })
     .catch(error => console.error('Ошибка загрузки данных:', error));
 
-  // Заполнение главного меню
-  function populateMainMenu(data) {
-    const mainMenuContainer = document.getElementById('mainMenuItems');
-    mainMenuContainer.innerHTML = "";
-    data.forEach((item, index) => {
-      const menuItem = document.createElement('div');
-      menuItem.className = 'menu-item';
-      const title = document.createElement('h2');
-      title.textContent = item.title;
-      menuItem.appendChild(title);
-      menuItem.addEventListener('click', () => openSubMenu(index));
-      mainMenuContainer.appendChild(menuItem);
-
-      gsap.from(menuItem, {
-        opacity: 0,
-        scale: 0.8,
-        duration: 0.6,
-        delay: index * 0.2,
-        ease: "back.out(1.7)"
-      });
-    });
-  }
-
-  // Переход к подменю
-  function openSubMenu(mainIndex) {
-    const selectedCategory = menuData[mainIndex];
-    const subMenuContainer = document.getElementById('subMenuItems');
-    const subMenuTitle = document.getElementById('subMenuTitle');
-    subMenuTitle.textContent = selectedCategory.title;
-    subMenuContainer.innerHTML = "";
-
-    selectedCategory.submenus.forEach((submenu, index) => {
-      const submenuItem = document.createElement('div');
-      submenuItem.className = 'submenu-item';
-      submenuItem.textContent = submenu.title;
-      submenuItem.addEventListener('click', () => {
-        if (submenu.guide) {
-          openGuide(submenu.guide, submenu.title);
-        } else {
-          alert(`Открывается "${submenu.title}". Функционал пока не реализован.`);
-        }
-      });
-      subMenuContainer.appendChild(submenuItem);
-
-      gsap.from(submenuItem, {
-        opacity: 0,
-        x: 100,
-        duration: 0.5,
-        delay: index * 0.15,
-        ease: "power2.out"
-      });
-    });
-
-    gsap.to("#mainMenu", {
-      opacity: 0,
-      y: -50,
-      duration: 0.5,
-      ease: "power2.in",
-      onComplete: () => {
-        document.getElementById('mainMenu').style.display = "none";
-        document.getElementById('subMenu').style.display = "block";
-        gsap.from("#subMenu", {
-          opacity: 0,
-          y: 50,
-          duration: 0.5,
-          ease: "power2.out"
+  // Функция формирования выдвижного меню
+  function populateSideMenu(data) {
+    const menuList = document.getElementById('menuList');
+    menuList.innerHTML = "";
+    
+    data.forEach(category => {
+      // Создаем элемент для большой категории
+      const categoryItem = document.createElement('li');
+      categoryItem.className = 'category-item';
+      categoryItem.textContent = category.title;
+      
+      // Создаем вложенный список для подкатегорий
+      const subList = document.createElement('ul');
+      subList.className = 'subcategory-list';
+      
+      category.submenus.forEach(submenu => {
+        const subItem = document.createElement('li');
+        subItem.className = 'subcategory-item';
+        subItem.textContent = submenu.title;
+        subItem.addEventListener('click', () => {
+          // Закрываем меню при выборе
+          closeSideMenu();
+          if (submenu.guide) {
+            openGuide(submenu.guide, submenu.title);
+          } else {
+            alert(`Открывается "${submenu.title}". Функционал пока не реализован.`);
+          }
         });
-      }
+        subList.appendChild(subItem);
+      });
+      
+      categoryItem.appendChild(subList);
+      menuList.appendChild(categoryItem);
     });
   }
 
-  // Переход к содержимому гайда
+  // Открытие гайда в основном контенте
   function openGuide(guideObj, guideTitle) {
-    const guideDetails = document.getElementById('guideDetails');
-    guideDetails.innerHTML = "";
+    const guideContentEl = document.getElementById('guideContent');
+    const welcomeEl = document.getElementById('welcome');
+    guideContentEl.innerHTML = "";
 
     const titleEl = document.createElement('h2');
     titleEl.textContent = guideTitle;
-    guideDetails.appendChild(titleEl);
+    guideContentEl.appendChild(titleEl);
 
     guideObj.sections.forEach((section, index) => {
       let sectionEl;
-
       if (section.type === 'text') {
-        // Обычный текст
         sectionEl = document.createElement('p');
         sectionEl.innerHTML = section.content;
-
       } else if (section.type === 'image') {
-        // Оборачиваем <img> в ссылку <a>, чтобы картинка была кликабельной
         const linkEl = document.createElement('a');
         linkEl.href = section.src;
-        linkEl.target = "_blank";       // Открывать в новой вкладке
-        linkEl.className = "image-link"; // Применяются стили .image-link из style.css
-
+        linkEl.target = "_blank";
+        linkEl.className = "image-link";
         const imgEl = document.createElement('img');
         imgEl.src = section.src;
         imgEl.alt = section.alt || '';
-
         linkEl.appendChild(imgEl);
         sectionEl = linkEl;
-
       } else if (section.type === 'interactive-image') {
-        // Интерактивная картинка с hotspot'ами
         const containerEl = document.createElement('div');
         containerEl.className = 'interactive-image-container';
-
         const imgEl = document.createElement('img');
         imgEl.src = section.src;
         imgEl.alt = section.alt || 'Interactive image';
         containerEl.appendChild(imgEl);
-
         if (section.hotspots && Array.isArray(section.hotspots)) {
           section.hotspots.forEach(hs => {
             const hotspotEl = document.createElement('div');
             hotspotEl.className = 'hotspot';
             hotspotEl.style.top = hs.top;
             hotspotEl.style.left = hs.left;
-
             const tooltipEl = document.createElement('div');
             tooltipEl.className = 'tooltip';
             tooltipEl.innerHTML = hs.tooltip || '';
@@ -149,100 +99,29 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         sectionEl = containerEl;
       }
-
-      guideDetails.appendChild(sectionEl);
-
-      // GSAP-анимация появления
-      gsap.from(sectionEl, {
-        opacity: 0,
-        y: 30,
-        duration: 0.6,
-        delay: index * 0.2,
-        ease: "power2.out"
-      });
+      guideContentEl.appendChild(sectionEl);
+      gsap.from(sectionEl, { opacity: 0, y: 20, duration: 0.6, delay: index * 0.2, ease: "power2.out" });
     });
-
-    gsap.to("#subMenu", {
-      opacity: 0,
-      y: -50,
-      duration: 0.5,
-      ease: "power2.in",
-      onComplete: () => {
-        document.getElementById('subMenu').style.display = "none";
-        document.getElementById('guideContent').style.display = "block";
-        gsap.from("#guideContent", {
-          opacity: 0,
-          y: 50,
-          duration: 0.5,
-          ease: "power2.out"
-        });
-      }
-    });
+    
+    // Показываем блок с гайдом и скрываем приветствие
+    welcomeEl.style.display = "none";
+    guideContentEl.style.display = "block";
   }
 
-  // Кнопка "Назад" для возврата к главному меню
-  document.getElementById('backToMain').addEventListener('click', () => {
-    const subMenuEl = document.getElementById('subMenu');
-    const mainMenuEl = document.getElementById('mainMenu');
+  // Функция открытия бокового меню
+  function openSideMenu() {
+    const sideMenu = document.getElementById('sideMenu');
+    gsap.to(sideMenu, { x: 0, duration: 0.3, ease: "power2.out" });
+  }
 
-    gsap.to(subMenuEl, {
-      opacity: 0,
-      y: 50,
-      duration: 0.5,
-      ease: "power2.in",
-      onComplete: () => {
-        subMenuEl.style.display = "none";
-        subMenuEl.style.opacity = "";
-        subMenuEl.style.transform = "";
+  // Функция закрытия бокового меню
+  function closeSideMenu() {
+    const sideMenu = document.getElementById('sideMenu');
+    gsap.to(sideMenu, { x: "-100%", duration: 0.3, ease: "power2.in" });
+  }
 
-        mainMenuEl.style.display = "block";
-        mainMenuEl.style.opacity = 0;
-        mainMenuEl.style.transform = "translateY(-50px)";
-
-        gsap.to(mainMenuEl, {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power2.out",
-          onComplete: () => {
-            mainMenuEl.style.opacity = "";
-            mainMenuEl.style.transform = "";
-          }
-        });
-      }
-    });
-  });
-
-  // Кнопка "Назад" для возврата к подменю из гайда
-  document.getElementById('backToSubMenu').addEventListener('click', () => {
-    const guideContentEl = document.getElementById('guideContent');
-    const subMenuEl = document.getElementById('subMenu');
-
-    gsap.to(guideContentEl, {
-      opacity: 0,
-      y: 50,
-      duration: 0.5,
-      ease: "power2.in",
-      onComplete: () => {
-        guideContentEl.style.display = "none";
-        guideContentEl.style.opacity = "";
-        guideContentEl.style.transform = "";
-
-        subMenuEl.style.display = "block";
-        subMenuEl.style.opacity = 0;
-        subMenuEl.style.transform = "translateY(-50px)";
-
-        gsap.to(subMenuEl, {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power2.out",
-          onComplete: () => {
-            subMenuEl.style.opacity = "";
-            subMenuEl.style.transform = "";
-          }
-        });
-      }
-    });
-  });
+  // Обработчик кнопки гамбургера
+  document.getElementById('menuToggle').addEventListener('click', openSideMenu);
+  // Обработчик кнопки закрытия меню
+  document.getElementById('closeMenu').addEventListener('click', closeSideMenu);
 });

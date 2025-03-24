@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>TAIYAN - Гайды по использованию</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAIYAN - Руководства</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
   <!-- Telegram Web Apps -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -15,29 +15,33 @@
 <body>
   <div id="app">
     <header>
+      <button id="menuToggle" class="menu-toggle">&#9776;</button>
       <h1 class="logo">TAIYAN</h1>
     </header>
-    <div class="container">
-      <!-- Главное меню -->
-      <div id="mainMenu">
-        <h2>Выберите раздел</h2>
-        <div id="mainMenuItems" class="menu-grid"></div>
+    
+    <!-- Выдвижное меню -->
+    <aside id="sideMenu">
+      <div class="side-menu-header">
+        <h2>Категории</h2>
+        <button id="closeMenu" class="close-menu">&times;</button>
       </div>
-      
-      <!-- Подменю -->
-      <div id="subMenu" style="display: none;">
-        <button id="backToMain" class="back-button">← Назад</button>
-        <h2 id="subMenuTitle">Подменю</h2>
-        <div id="subMenuItems" class="menu-list"></div>
+      <ul id="menuList">
+        <!-- Пункты меню будут созданы динамически -->
+      </ul>
+    </aside>
+    
+    <!-- Основной контент -->
+    <main id="content">
+      <div id="welcome">
+        <h2>Добро пожаловать!</h2>
+        <p>Выберите нужный гайд через выдвижное меню слева.</p>
       </div>
-      
-      <!-- Контент гайда -->
       <div id="guideContent" style="display: none;">
-        <button id="backToSubMenu" class="back-button">← Назад</button>
-        <div id="guideDetails"></div>
+        <!-- Здесь загружается содержимое гайда -->
       </div>
-    </div>
+    </main>
   </div>
+  
   <script src="script.js"></script>
 </body>
 </html>
