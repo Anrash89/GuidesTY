@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Добавляем секцию с внешними ссылками в самом конце меню
     const externalHeader = document.createElement('li');
     externalHeader.className = 'external-header';
-    externalHeader.textContent = 'ПРЯМЫЕ ССЫЛКИ';
+    externalHeader.textContent = 'Внешние ссылки';
     menuList.appendChild(externalHeader);
     
     const externalLinks = [

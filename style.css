@@ -1,3 +1,12 @@
+/* CSS-переменные для акцентных цветов */
+:root {
+  --primary-color: #e74c3c;   /* Ярко-красный */
+  --accent-color: #ff6b6b;    /* Более светлый оттенок красного */
+  --bg-color: #fff;
+  --text-color: #333;
+  --shadow-color: rgba(0, 0, 0, 0.15);
+}
+
 /* Сброс стилей */
 * {
   margin: 0;
@@ -7,19 +16,20 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #fff;
-  color: #333;
+  background: var(--bg-color);
+  color: var(--text-color);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* Фиксированная шапка */
+/* Фиксированная шапка с градиентом и эффектом тени */
 header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background-color: #fff;
-  border-bottom: 2px solid #e74c3c;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  box-shadow: 0 2px 6px var(--shadow-color);
   padding: 10px 20px;
   display: flex;
   align-items: center;
@@ -29,16 +39,22 @@ header {
 .logo {
   flex: 1;
   text-align: center;
-  font-size: 2em;
-  color: #e74c3c;
+  font-size: 2.2em;
+  color: var(--bg-color);
+  text-shadow: 1px 1px 2px var(--shadow-color);
 }
 
 .menu-toggle {
   background: none;
   border: none;
   font-size: 1.8em;
-  color: #e74c3c;
+  color: var(--bg-color);
   cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.1);
 }
 
 /* Выдвижное боковое меню */
@@ -46,11 +62,11 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  width: 280px;
+  width: 300px;
   height: 100%;
-  background-color: #fff;
-  border-right: 2px solid #e74c3c;
-  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  background: var(--bg-color);
+  border-right: 3px solid var(--primary-color);
+  box-shadow: 2px 0 12px var(--shadow-color);
   transform: translateX(-100%);
   z-index: 1000;
   overflow-y: auto;
@@ -60,21 +76,26 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid #e74c3c;
+  padding: 20px;
+  background: var(--primary-color);
+  color: var(--bg-color);
 }
 
 .side-menu-header h2 {
-  font-size: 1.4em;
-  color: #e74c3c;
+  font-size: 1.6em;
 }
 
 .close-menu {
   background: none;
   border: none;
-  font-size: 1.6em;
-  color: #e74c3c;
+  font-size: 1.8em;
+  color: var(--bg-color);
   cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-menu:hover {
+  color: var(--accent-color);
 }
 
 #menuList {
@@ -84,63 +105,72 @@ header {
 
 /* Категории и подкатегории */
 .category-item {
-  padding: 10px 20px;
-  border-bottom: 1px solid #eee;
+  padding: 15px 20px;
+  border-bottom: 1px solid #f0f0f0;
   font-weight: 700;
-  color: #e74c3c;
+  color: var(--primary-color);
+  background: linear-gradient(90deg, rgba(231,76,60,0.05), rgba(231,76,60,0));
+  transition: background 0.3s;
+}
+
+.category-item:hover {
+  background: linear-gradient(90deg, rgba(231,76,60,0.1), rgba(231,76,60,0));
 }
 
 .subcategory-list {
   list-style: none;
   padding-left: 20px;
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
 .subcategory-item {
-  padding: 8px 0;
+  padding: 10px 0;
   cursor: pointer;
-  color: #333;
-  font-weight: 400;
-  border-left: 3px solid transparent;
+  color: var(--text-color);
+  border-left: 4px solid transparent;
   transition: background 0.3s, border-color 0.3s;
 }
 
 .subcategory-item:hover {
-  background-color: #fceae8;
-  border-left-color: #e74c3c;
+  background-color: #fdecec;
+  border-left-color: var(--primary-color);
 }
 
 /* Внешние ссылки */
 .external-header {
-  padding: 10px 20px;
+  padding: 15px 20px;
   font-weight: 700;
-  color: #e74c3c;
-  border-top: 1px solid #eee;
+  color: var(--primary-color);
+  border-top: 1px solid #f0f0f0;
+  background-color: #fff;
 }
 
 .external-item {
-  padding: 8px 20px;
-  border-bottom: 1px solid #eee;
+  padding: 10px 20px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .external-item a {
   text-decoration: none;
-  color: #333;
+  color: var(--text-color);
   transition: color 0.3s;
 }
 
 .external-item a:hover {
-  color: #e74c3c;
+  color: var(--primary-color);
 }
 
 /* Основной контент */
 #content {
   padding: 20px;
-  margin-top: 80px; /* Отступ для фиксированной шапки */
+  margin-top: 90px; /* Отступ для фиксированной шапки */
+  min-height: calc(100vh - 90px);
+  animation: fadeIn 0.8s ease;
 }
 
 #welcome {
   text-align: center;
+  padding: 40px 20px;
 }
 
 #guideContent {
@@ -151,14 +181,15 @@ header {
 /* Изображения в гайдах */
 #guideContent img {
   width: 100%;
-  border-radius: 5px;
+  border-radius: 8px;
   margin: 20px 0;
-  transition: transform 0.3s;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 #guideContent img:hover {
   transform: scale(1.03);
+  box-shadow: 0 6px 16px var(--shadow-color);
 }
 
 /* Интерактивное изображение */
@@ -169,26 +200,31 @@ header {
 
 .interactive-image-container img {
   width: 100%;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 .hotspot {
   position: absolute;
-  width: 14px;
-  height: 14px;
-  background-color: #e74c3c;
-  border: 2px solid #fff;
+  width: 16px;
+  height: 16px;
+  background-color: var(--primary-color);
+  border: 2px solid var(--bg-color);
   border-radius: 50%;
   cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.hotspot:hover {
+  transform: scale(1.2);
 }
 
 .tooltip {
   display: none;
   position: absolute;
-  top: 24px;
+  top: 26px;
   left: 0;
-  background-color: #333;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--bg-color);
   padding: 6px 10px;
   border-radius: 4px;
   font-size: 0.85em;
@@ -207,7 +243,7 @@ header {
   left: 10px;
   border-width: 0 6px 6px 6px;
   border-style: solid;
-  border-color: transparent transparent #333 transparent;
+  border-color: transparent transparent var(--primary-color) transparent;
 }
 
 /* Кликабельные ссылки на изображения */
@@ -215,6 +251,12 @@ a.image-link {
   display: block;
   text-decoration: none;
   color: inherit;
+}
+
+/* Анимация появления страницы */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Адаптив */
