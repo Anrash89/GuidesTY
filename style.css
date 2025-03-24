@@ -41,30 +41,6 @@ header {
   cursor: pointer;
 }
 
-/* Горизонтальное меню прямого доступа */
-#directAccessMenu {
-  margin-top: 60px; /* Отступ под фиксированной шапкой */
-  background-color: #e74c3c;
-  padding: 10px 20px;
-}
-
-#directAccessMenu ul {
-  display: flex;
-  gap: 15px;
-  list-style: none;
-  overflow-x: auto;
-}
-
-#directAccessMenu li a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-#directAccessMenu li a:hover {
-  color: #f4f4f4;
-}
-
 /* Выдвижное боковое меню */
 #sideMenu {
   position: fixed;
@@ -160,7 +136,7 @@ header {
 /* Основной контент */
 #content {
   padding: 20px;
-  margin-top: 120px; /* Отступ для фиксированной шапки и горизонтального меню */
+  margin-top: 80px; /* Отступ для фиксированной шапки */
 }
 
 #welcome {

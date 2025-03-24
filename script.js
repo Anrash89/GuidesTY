@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function() {
     .then(data => {
       menuData = data;
       populateSideMenu(data);
-      populateDirectMenu(data);
     })
     .catch(error => console.error('Ошибка загрузки данных:', error));
 
@@ -52,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Добавляем секцию с внешними ссылками в самом конце меню
     const externalHeader = document.createElement('li');
     externalHeader.className = 'external-header';
-    externalHeader.textContent = 'Внешние ссылки';
+    externalHeader.textContent = 'ПРЯМЫЕ ССЫЛКИ';
     menuList.appendChild(externalHeader);
     
     const externalLinks = [
@@ -70,28 +69,6 @@ document.addEventListener("DOMContentLoaded", function() {
       linkEl.textContent = linkData.label;
       extItem.appendChild(linkEl);
       menuList.appendChild(extItem);
-    });
-  }
-
-  // Формирование горизонтального меню прямого доступа
-  function populateDirectMenu(data) {
-    const directMenuList = document.getElementById('directMenuList');
-    directMenuList.innerHTML = "";
-    data.forEach(category => {
-      category.submenus.forEach(submenu => {
-        if(submenu.guide) {
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = "#";
-          a.textContent = `${category.title} - ${submenu.title}`;
-          a.addEventListener('click', (e) => {
-            e.preventDefault();
-            openGuide(submenu.guide, submenu.title);
-          });
-          li.appendChild(a);
-          directMenuList.appendChild(li);
-        }
-      });
     });
   }
 
