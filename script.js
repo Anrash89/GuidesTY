@@ -55,9 +55,9 @@ document.addEventListener("DOMContentLoaded", function() {
     menuList.appendChild(externalHeader);
     
     const externalLinks = [
-      { label: 'Изображение', url: 'https://home-northeast-preparing-mitchell.trycloudflare.com/' },
+      { label: 'Изображение', url: 'https://maintaining-supported-utilization-ohio.trycloudflare.com/' },
       { label: 'Из аудио в текст', url: 'https://peace-gentleman-mh-disabilities.trycloudflare.com' },
-      { label: 'Улучшение изображения', url: 'https://township-fundamental-extra-lovers.trycloudflare.com' }
+      { label: 'Улучшение изображения', url: 'https://municipality-hist-guaranteed-intermediate.trycloudflare.com/' }
     ];
     
     externalLinks.forEach(linkData => {
