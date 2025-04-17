@@ -55,9 +55,9 @@ document.addEventListener("DOMContentLoaded", function() {
     menuList.appendChild(externalHeader);
     
     const externalLinks = [
-      { label: 'Изображение', url: 'https://tissue-ethical-le-amsterdam.trycloudflare.com/pinokio/login' },
+      { label: 'Изображение', url: 'https://concord-essence-oxygen-recreation.trycloudflare.com/pinokio/login' },
       { label: 'Из аудио в текст', url: 'https://peace-gentleman-mh-disabilities.trycloudflare.com' },
-      { label: 'Улучшение изображения', url: 'https://municipality-hist-guaranteed-intermediate.trycloudflare.com/' }
+      { label: 'Улучшение изображения', url: 'https://international-upset-wx-forth.trycloudflare.com/pinokio/login' }
     ];
     
     externalLinks.forEach(linkData => {
